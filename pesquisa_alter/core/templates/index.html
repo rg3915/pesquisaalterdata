@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container">
+    <p>Exemplo do uso de DataTables com Django.</p>
+    <!-- <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p> -->
+  </div>
+</div>
+
+<div class="container">
+   <!--Example row of columns-->
+  <!--<div class="row">-->
+    <!--<div class="col s6">-->
+      <!--<h2>Contatos</h2>-->
+      <!--<table id="myTable1" class="mdl-data-table" style="width:100%">-->
+        <!--<thead>-->
+          <!--<tr>-->
+            <!--<th>Nome</th>-->
+            <!--<th>E-mail</th>-->
+            <!--<th>Telefone</th>-->
+          <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+          <!--{% for person in person_list %}-->
+            <!--<tr>-->
+              <!--<td>{{ person.name }}</td>-->
+              <!--<td>{{ person.email }}</td>-->
+              <!--<td>{{ person.phone }}</td>-->
+              <!--&lt;!&ndash;<td>{{ person.get_gender_display }}</td>&ndash;&gt;-->
+            <!--</tr>-->
+          <!--{% endfor %}-->
+        <!--</tbody>-->
+      <!--</table>-->
+    <!--</div>-->
+
+    <div class="col s12">
+      <h2>Clientes</h2>
+
+        <table id="myTable2" class="mdl-data-table" style="width:100%">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nome</th>
+              <th>E-mail</th>
+              <th>Telefone</th>
+            </tr>
+          </thead>
+        </table>
+
+    </div>
+  </div>
+
+
+</div> <!-- /container -->
+
+{% endblock content %}
+
+{% block js %}
+
+<script src="{% static 'js/data.js' %}"></script>
+
+{% endblock js %}
