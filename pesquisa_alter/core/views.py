@@ -1,5 +1,5 @@
 from django.http import JsonResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Person, Questions, Pesquisa
 from .forms import PesquisaForm
 
@@ -28,60 +28,37 @@ def person_json(request):
     return JsonResponse(response)
 
 
-def add_pesquisa(request):
-    # context = {}
-    # person_list = Person.objects.all()
-    # context['person_list'] = person_list
-    return render(request, 'add_pesquisa.html')
-
-
-def person_create(request):
-    if request.method == 'POST':
-        form = PersonForm(request.POST)
-
-        if form.is_valid():
-            print('<<<<==== FORM VALIDO ====>>>>')
-            new = form.save(commit=False)
-            new.save()
-            form.save_m2m()
-
-            return HttpResponseRedirect('/cliente/lista/')
-        else:
-            print('<<<<==== AVISO DE FORMULARIO INVALIDO ====>>>>')
-            print(form)
-            return render(request, 'person_create.html', {'form': form})
-    else:
-        context = {'form': PersonForm()}
-        return render(request, 'person_create.html', context)
-
-
-def addAllQuestionsInPesquisa(request):
-    person = Person.objects.get(pk=1)
-    questions = Questions.objects.all()
-
-    for question in questions:
-        try:
-            Pesquisa.objects.get(
-                search_key='092018',
-                person=person,
-                question=question
-            )
-            print('existe')
-        except Pesquisa.DoesNotExist:
-            Pesquisa.objects.get_or_create(
-                search_key='092018',
-                person=person,
-                question=question,
-                response='I'
-            )
-            print('Não existe')
-
-    return HttpResponseRedirect('bolsa/pesquisa/listar')
-
-
 def pesquisa_add(request):
     template_name = 'pesquisa_add.html'
-    form = PesquisaForm
-    context = {}
-    context['form'] = form
+    if request.method == 'POST':
+        form = PesquisaForm(request.POST)
+        if form.is_valid():
+            data = dict(
+                search_key=form.cleaned_data['search_key'],
+                person=form.cleaned_data['person'],
+                researched=form.cleaned_data['researched'],
+                questions=Questions.objects.all(),
+            )
+            criar_pesquisa(**data)
+            # Não usar o método save().
+            # form.save()
+            return redirect('core:index')
+    else:
+        form = PesquisaForm()
+    context = {'form': form}
     return render(request, template_name, context)
+
+
+def criar_pesquisa(**data):
+    # Pegando somente as perguntas
+    questions = data['questions']
+    pesquisas = []
+    for question in questions:
+        obj = Pesquisa(
+            search_key=data['search_key'],
+            person=data['person'],
+            researched=data['researched'],
+            question=question
+        )
+        pesquisas.append(obj)
+    Pesquisa.objects.bulk_create(pesquisas)
