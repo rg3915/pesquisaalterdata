@@ -76,3 +76,8 @@ def addAllQuestionsInPesquisa(request):
             print('Não existe')
 
     return HttpResponseRedirect('bolsa/pesquisa/listar')
+
+
+def pesquisa_add(request):
+    template_name = 'pesquisa_add.html'
+    return render(request, template_name)

@@ -4,11 +4,7 @@
 {% block content %}
 
 <div class="container">
-  <h1>Cliente {{ person.name }} <button class="btn" href="">Novo</button></h1>
-
-
-
-
+  <h1>Cliente {{ person.name }} <a class="btn" href="{% url 'core:pesquisa_add' %}">Novo</a></h1>
   <h2>Pesquisas</h2>
 
   <table id="myTable" class="table mdl-data-table" style="width:100%">
