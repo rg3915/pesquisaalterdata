@@ -18,30 +18,13 @@ def person_json(request):
     response = {'data': data}
     return JsonResponse(response)
 
+
 def add_pesquisa(request):
     # context = {}
     # person_list = Person.objects.all()
     # context['person_list'] = person_list
     return render(request, 'add_pesquisa.html')
 
-# def add_pesquisa2(request):
-#     if request.method == 'POST':
-#         form = PesquisaForm(request.POST)
-#
-#         if form.is_valid():
-#             print('<<<<==== FORM VALIDO ====>>>>')
-#             new = form.save(commit=False)
-#             new.save()
-#             form.save_m2m()
-#
-#             return HttpResponseRedirect('/cliente/lista/')
-#         else:
-#             print('<<<<==== AVISO DE FORMULARIO INVALIDO ====>>>>')
-#             print(form)
-#             return render(request, 'movement_create.html', {'form':form})
-#     else:
-#         context = {'form': PesquisaForm()}
-#         return render(request, 'movement_create.html', context)
 
 def person_create(request):
     if request.method == 'POST':
@@ -57,7 +40,7 @@ def person_create(request):
         else:
             print('<<<<==== AVISO DE FORMULARIO INVALIDO ====>>>>')
             print(form)
-            return render(request, 'person_create.html', {'form':form})
+            return render(request, 'person_create.html', {'form': form})
     else:
         context = {'form': PersonForm()}
         return render(request, 'person_create.html', context)

@@ -40,7 +40,7 @@
     <div class="col s12">
       <h2>Clientes</h2>
 
-        <table id="myTable2" class="mdl-data-table" style="width:100%">
+        <table id="myTable2" class="table mdl-data-table" style="width:100%">
           <thead>
             <tr>
               <th>Código</th>
@@ -50,7 +50,16 @@
             </tr>
           </thead>
         </table>
-
+        <tbody>
+          {% for person in person_list %}
+            <tr>
+              <td>{{ person.cdalterdata }}</td>
+              <td>{{ person.name }}</td>
+              <td>{{ person.email }}</td>
+              <td>{{ person.phone }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
     </div>
   </div>
 
