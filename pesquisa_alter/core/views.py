@@ -1,6 +1,7 @@
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from .models import Person, Questions, Pesquisa
+from .forms import PesquisaForm
 
 
 def index(request):
@@ -80,4 +81,7 @@ def addAllQuestionsInPesquisa(request):
 
 def pesquisa_add(request):
     template_name = 'pesquisa_add.html'
-    return render(request, template_name)
+    form = PesquisaForm
+    context = {}
+    context['form'] = form
+    return render(request, template_name, context)
