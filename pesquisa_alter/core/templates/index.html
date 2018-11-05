@@ -49,17 +49,19 @@
               <th>Telefone</th>
             </tr>
           </thead>
+          <tbody>
+            {% for person in person_list %}
+              <tr>
+                <td>{{ person.cdalterdata }}</td>
+                <td>
+                  <a href="{% url 'core:person_detail' person.pk %}">{{ person.name }}</a>
+                </td>
+                <td>{{ person.email }}</td>
+                <td>{{ person.phone }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
         </table>
-        <tbody>
-          {% for person in person_list %}
-            <tr>
-              <td>{{ person.cdalterdata }}</td>
-              <td>{{ person.name }}</td>
-              <td>{{ person.email }}</td>
-              <td>{{ person.phone }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
     </div>
   </div>
 
@@ -70,6 +72,6 @@
 
 {% block js %}
 
-<script src="{% static 'js/data.js' %}"></script>
+<script src=" static 'js/data.js' %}"></script>
 
 {% endblock js %}

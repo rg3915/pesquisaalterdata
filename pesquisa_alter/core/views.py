@@ -1,7 +1,5 @@
-from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseRedirect
-
-# from pesquisa_alter.core.forms import PesquisaForm
+from django.shortcuts import get_object_or_404, render
 from .models import Person, Questions, Pesquisa
 
 
@@ -10,6 +8,16 @@ def index(request):
     person_list = Person.objects.all()
     context['person_list'] = person_list
     return render(request, 'index.html', context)
+
+
+def person_detail(request, pk):
+    context = {}
+    person = get_object_or_404(Person, pk=pk)
+    context['person'] = person
+    # Retornando todas as pesquisas de uma pessoa.
+    pesquisas = Pesquisa.objects.filter(person=person)
+    context['pesquisas'] = pesquisas
+    return render(request, 'person_detail.html', context)
 
 
 def person_json(request):

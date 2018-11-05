@@ -16,4 +16,4 @@ class QuestionsAdmin(admin.ModelAdmin):
 
 @admin.register(Pesquisa)
 class PesquisaAdmin(admin.ModelAdmin):
-    list_display = ('__str__', )
+    list_display = ('__str__', 'person')

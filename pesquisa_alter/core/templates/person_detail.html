@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+  <h1>Cliente {{ person.name }} <button class="btn" href="">Novo</button></h1>
+
+
+
+
+  <h2>Pesquisas</h2>
+
+  <table id="myTable" class="table mdl-data-table" style="width:100%">
+    <thead>
+      <tr>
+        <th>Chave de pesquisa</th>
+        <th>Nome</th>
+        <th>Pergunta</th>
+        <th>Resposta</th>
+        <th>Período da pesquisa</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for pesquisa in pesquisas %}
+        <tr>
+          <td>{{ pesquisa.search_key }}</td>
+          <td>{{ pesquisa.person }}</td>
+          <td>{{ pesquisa.question }}</td>
+          <td>{{ pesquisa.get_response_display }}</td>
+          <td>{{ pesquisa.participation_on }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock content %}
