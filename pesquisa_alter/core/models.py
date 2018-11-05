@@ -90,9 +90,17 @@ class Pesquisa(models.Model):
         'core.Questions', related_name='Pergunta', on_delete=models.CASCADE,)
     response = models.CharField(
         'Resposta', max_length=1, choices=RESPOSTA_CHOICES, default='I')
+    # participation_on = models.DateField('período da pesquisa', default=timezone.now)
     participation_on = models.DateField(
-        'período da pesquisa', default=timezone.now)
-    created_on = models.DateTimeField('solicitado em', default=timezone.now)
+        'período da pesquisa',
+        auto_now_add=True,
+        auto_now=False
+    )
+    created_on = models.DateTimeField(
+        'solicitado em',
+        auto_now_add=True,
+        auto_now=False
+    )
 
     objects = PesquisaManager()
 
