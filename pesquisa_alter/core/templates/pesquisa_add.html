@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_materialize.html" %}
 {% load static %}
 
 {% block content %}
@@ -6,6 +6,35 @@
 <div class="container">
   <h1>Nova pesquisa</h1>
 
+
+
+<div class="container expand-on-small-only">
+    <div class="row valign change-form">
+        <div class="m8 offset-m2 l8 offset-l2">
+            <div id="card-radius">
+              <form action="." method="POST">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <div class="card-action">
+                      <div class="right-align">
+                          <button class="waves-effect waves-light btn" type="submit">Enviar</button>
+                      </div>
+                  </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 </div>
 
 {% endblock content %}
+
+{% block js %}
+  <script>
+    $(document).ready(function(){
+      $('select').formSelect();
+    });
+  </script>
+{% endblock js %}
